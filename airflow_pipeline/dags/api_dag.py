@@ -5,15 +5,14 @@ from airflow.models import DAG
 from datetime import datetime, timedelta
 from airflow_pipeline.operator.api_operator import ApiOperator
 from os.path import join
+import pendulum
 
-with DAG(dag_id = "Api_dag", start_date=datetime.now()):
+with DAG(dag_id = "API_DAG", start_date=pendulum.datetime(2025, 10, 1), schedule='@daily', catchup=True) as dag:
         TIMESTAMP_FORMAT = "%Y-%m-%dT%H:%M:%S.00Z"
 
-        end_time = datetime.now().strftime(TIMESTAMP_FORMAT)
-        start_time = (datetime.now() + timedelta(-1)).date().strftime(TIMESTAMP_FORMAT)
         query = "datascience"
 
         to = ApiOperator(file_path=join("datalake/twitter_datascience",
                             "extract_date={{ ds }}",
                             "datascience_{{ ds_nodash }}.json"), 
-                            query=query, start_time=start_time,end_time=end_time, task_id="extract_data")
+                            query=query, start_time="{{data_interval_start.strftime('%Y-%m-%dT%H:%M:%S.00Z')}}",end_time="{{data_interval_end.strftime('%Y-%m-%dT%H:%M:%S.00Z')}}", task_id="extract_data_datascience")
