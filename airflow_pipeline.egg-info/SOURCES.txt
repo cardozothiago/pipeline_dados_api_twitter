@@ -1,0 +1,5 @@
+setup.py
+airflow_pipeline.egg-info/PKG-INFO
+airflow_pipeline.egg-info/SOURCES.txt
+airflow_pipeline.egg-info/dependency_links.txt
+airflow_pipeline.egg-info/top_level.txt
