@@ -14,3 +14,15 @@ AIRFLOW_VERSION=3.1.0
 PYTHON_VERSION=3.10
 CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
 `
+
+Antes de iniciar o Airflow inicialize a variável de ambiente do Airflow
+
+`
+export AIRFLOW_HOME=${pwd}/airflow_pipeline
+`
+
+Para iniciar o airflow
+
+`
+airflow standalone
+`
