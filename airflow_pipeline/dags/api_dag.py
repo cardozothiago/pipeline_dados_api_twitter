@@ -30,4 +30,12 @@ with DAG(dag_id = "API_DAG", start_date=pendulum.datetime(2025, 10, 1), schedule
                                                    '--process_date', "{{ ds }}"])
         
 
-t1 >> t2
+        t3 = SparkSubmitOperator(task_id="insight_twitter",
+                                            application="/home/thiago/git_repos/pipeline_dados_api_twitter/src/spark/insights.py",
+                                            name="insight_twitter",
+                                            application_args=["--src", BASE_FOLDER.format(stage="Silver", partition=""),
+                                             "--dest_path", BASE_FOLDER.format(stage="Gold", partition=""),
+                                             "--process_date", "{{ ds }}"])
+
+
+t1 >> t2 >> t3
