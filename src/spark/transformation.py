@@ -1,4 +1,3 @@
-from ast import arg
 from pyspark.sql import functions as f
 from os.path import join
 from pyspark.sql import SparkSession

@@ -9,5 +9,6 @@ __pycache__/
 *.db
 *.pid
 airflow_pipeline/simple_auth_manager_passwords.json.generated
-
+datalake/*
+dados_transformados/
 venv/
